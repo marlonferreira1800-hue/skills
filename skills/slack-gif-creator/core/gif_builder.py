@@ -33,12 +33,14 @@ class GIFBuilder:
 
     def add_frame(self, frame: np.ndarray | Image.Image):
         """
-        Add a frame to the GIF.
+        Add a frame to the GIF. Stored frames are defensive snapshot copies so caller
+        can safely reuse or mutate the input buffer.
 
         Args:
             frame: Frame as numpy array or PIL Image (will be converted to RGB)
         """
-        if isinstance(frame, Image.Image):
+        is_pil = isinstance(frame, Image.Image)
+        if is_pil:
             frame = np.array(frame.convert("RGB"))
 
         # Ensure frame is correct size
@@ -48,6 +50,8 @@ class GIFBuilder:
                 (self.width, self.height), Image.Resampling.LANCZOS
             )
             frame = np.array(pil_frame)
+        elif not is_pil:
+            frame = frame.copy()
 
         self.frames.append(frame)
 
