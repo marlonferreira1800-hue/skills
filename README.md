@@ -54,6 +54,9 @@ After installing the plugin, you can use the skill by just mentioning it. For in
 
 These example skills are all already available to paid plans in Claude.ai. 
 
+> [!NOTE]
+> **Repository copies and Claude.ai sync:** The document skills in this repository serve as reference implementations and marketplace plugins. Note that paid plans in Claude.ai receive direct updates via account sync (`~/.claude/skills/synced/`), whereas this open-source repository receives snapshot exports (recent exports landed in #1447 on 2026-07-16 and #330 on 2026-02-03). If you notice version differences between your synced account folder and this repository, the synced version represents the deployed cloud environment.
+
 To use any skill from this repository or upload custom skills, follow the instructions in [Using skills in Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude#h_a4222fa77b).
 
 ## Claude API
