@@ -58,6 +58,7 @@ def run_loop(
     verbose: bool,
     live_report_path: Path | None = None,
     log_dir: Path | None = None,
+    non_trigger_threshold: float | None = None,
 ) -> dict:
     """Run the eval + improvement loop."""
     project_root = find_project_root()
@@ -95,6 +96,7 @@ def run_loop(
             project_root=project_root,
             runs_per_query=runs_per_query,
             trigger_threshold=trigger_threshold,
+            non_trigger_threshold=non_trigger_threshold,
             model=model,
         )
         eval_elapsed = time.time() - t0
@@ -250,7 +252,8 @@ def main():
     parser.add_argument("--timeout", type=int, default=30, help="Timeout per query in seconds")
     parser.add_argument("--max-iterations", type=int, default=5, help="Max improvement iterations")
     parser.add_argument("--runs-per-query", type=int, default=3, help="Number of runs per query")
-    parser.add_argument("--trigger-threshold", type=float, default=0.5, help="Trigger rate threshold")
+    parser.add_argument("--trigger-threshold", type=float, default=0.5, help="Trigger rate threshold for queries that should trigger")
+    parser.add_argument("--non-trigger-threshold", type=float, default=None, help="Trigger rate threshold for queries that should not trigger (defaults to 1 - trigger_threshold)")
     parser.add_argument("--holdout", type=float, default=0.4, help="Fraction of eval set to hold out for testing (0 to disable)")
     parser.add_argument("--model", required=True, help="Model for improvement")
     parser.add_argument("--verbose", action="store_true", help="Print progress to stderr")
@@ -300,6 +303,7 @@ def main():
         runs_per_query=args.runs_per_query,
         trigger_threshold=args.trigger_threshold,
         holdout=args.holdout,
+        non_trigger_threshold=args.non_trigger_threshold,
         model=args.model,
         verbose=args.verbose,
         live_report_path=live_report_path,
