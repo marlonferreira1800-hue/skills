@@ -1,7 +1,9 @@
 ---
 name: planejamento
 description: "Guia o agente a criar planos estruturados para qualquer objetivo: projetos de software, features, estudos, eventos ou tarefas complexas. Usar quando o usuário pedir um plano, roadmap, estratégia, decomposição de tarefa ou organização antes de executar algo."
-tags: ["mistral"]
+compatibility: "Criada para a plataforma Mistral (Vibe / Le Chat); registrada no workspace Mistral como a skill 'planejamento' (v1)."
+metadata:
+  platform: mistral
 ---
 
 # Planejamento
